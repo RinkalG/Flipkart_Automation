@@ -1,10 +1,6 @@
-
 plugins {
     id 'java'
 }
-
-
-
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'application'
@@ -28,14 +24,24 @@ dependencies {
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation 'org.seleniumhq.selenium:selenium-java:4.14.0'
 
+    // https://mvnrepository.com/artifact/org.testng/testng
+    testImplementation group: 'org.testng', name: 'testng', version: '7.6.0'
 }
-
+test {
+    useTestNG(){
+        suites 'src\test\resources\testng.xml'
+        
+        useDefaultListeners = true
+    }
+    testLogging {
+        //showStandardStreams = true
+        events "PASSED" , "SKIPPED" , "FAILED"
+    }
+}
 //task startScript(type:Exec) {
 //    commandLine './selenium-run.sh'
 //}
 
 //run.dependsOn startScript
-
 //test.dependsOn startScript
-
 mainClassName = 'demo.App'

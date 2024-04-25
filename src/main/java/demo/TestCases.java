@@ -1,5 +1,7 @@
 package demo;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -24,10 +26,18 @@ public class TestCases {
     }
 
     
-    public  void testCase01(){
+    public  void testCase01() throws InterruptedException{
         System.out.println("Start Test case: testCase01");
         driver.get("https://www.google.com");
-        System.out.println("end Test case: testCase02");
+        driver.get("https://www.flipkart.com/");
+        WebElement searchBar  = driver.findElement(By.xpath("//input[contains(@title,'Search')]"));
+        searchBar.sendKeys("Washing Machine");
+        searchBar.click();
+        Thread.sleep(2000);
+        WebElement sortByPopularity = driver.findElement(By.xpath("//div[text()='Popularity']"));
+        sortByPopularity.click();
+        Thread.sleep(2000);
+        System.out.println("end Test case: testCase01");
     }
 
 
